@@ -10,10 +10,11 @@ import './game.css';
 import { getBoard } from '../helpers/board';
 
 import { TILES } from '../helpers/consts';
-const { WALL, EMPTY, SNAKE_BODY, SNAKE_HEAD, SNAKE_TAIL, APPLE } = TILES;
+const { WALL, EMPTY, SNAKE_BODY, SNAKE_DEAD, SNAKE_HEAD, SNAKE_TAIL, APPLE } = TILES;
 
 const snakeTileToContent = {
   [SNAKE_BODY]: 'b',
+  [SNAKE_DEAD]: 'd',
   [SNAKE_HEAD]: 'h',
   [SNAKE_TAIL]: 't',
   [APPLE]: 'a',
@@ -37,9 +38,9 @@ const renderRow = (row, i) => (
     {row.map(renderCol)}
   </div>
 )
-const renderBoard = board => (
+const renderBoard = (board, alive) => (
   <div className="board">
-    {getBoard(board).map(renderRow)}
+    {getBoard(board, alive).map(renderRow)}
   </div>
 )
 
@@ -48,7 +49,7 @@ const Game = props => (
   tabIndex={0} // so keydowns are actually captured
   onKeyDown={props.changePlayerDirection}>
 
-    {renderBoard(props.board)}
+    {renderBoard(props.board, props.alive)}
 
     <p>
       <button onClick={props.startGame}>Start game</button>

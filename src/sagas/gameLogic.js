@@ -3,9 +3,6 @@ import { put, takeLatest, select } from 'redux-saga/effects'
 import { findSnakeHead, moveInDirection, isApple } from '../helpers/board';
 import { TIME_TICKED } from './gameLoop';
 
-export const GAME_LOOP_SUCEEDED = Symbol('gameLoop/GAME_LOOP_SUCEEDED');
-export const GAME_LOOP_FAILED = Symbol('gameLoop/GAME_LOOP_FAILED');
-
 export const SNAKE_MOVED = Symbol('gameLoop/PLAYER_MOVED');
 export const APPLE_EATEN = Symbol('gameLoop/APPLE_EATEN');
 export const SNAKE_DIED = Symbol('gameLoop/SNAKE_DIED');
@@ -58,28 +55,22 @@ function* moveSnake({ x, y, length }) {
 }
 
 function* gameLogic() {
-   try {
-      const { currentLocation, currentLength } = yield getCurrentSnake();
-      const newLocation = yield movePlayer();
-      const didCollide = yield checkWallCollision(newLocation);
-      const didEatApple = yield checkAppleChomp(newLocation);
+  const { currentLocation, currentLength } = yield getCurrentSnake();
+  const newLocation = yield movePlayer();
+  const didCollide = yield checkWallCollision(newLocation);
+  const didEatApple = yield checkAppleChomp(newLocation);
 
-      if (didCollide) {
-        yield killSnake(currentLocation);
-      } else {
-        if (didEatApple) {
-          yield eatApple(newLocation);
-        }
+  if (didCollide) {
+    yield killSnake(currentLocation);
+  } else {
+    if (didEatApple) {
+      yield eatApple(newLocation);
+    }
 
-        const newLength = currentLength + (didEatApple ? 1 : 0);
+    const newLength = currentLength + (didEatApple ? 1 : 0);
 
-        yield moveSnake({ ...newLocation, length: newLength });
-      }
-      
-      yield put({type: GAME_LOOP_SUCEEDED});
-   } catch (e) {
-      yield put({type: GAME_LOOP_FAILED, error: e});
-   }
+    yield moveSnake({ ...newLocation, length: newLength });
+  }
 }
 
 function* gameLogicSaga() {

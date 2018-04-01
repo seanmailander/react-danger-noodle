@@ -12,6 +12,7 @@ export const DIRECTIONS = {
 
 const WALL = Symbol('wallTile');
 const EMPTY = Symbol('emptyTile');
+const SNAKE_DEAD = Symbol('snakeDead');
 const SNAKE_HEAD = Symbol('snakeHead');
 const SNAKE_BODY = Symbol('snakeBody');
 const SNAKE_TAIL = Symbol('snakeTail');
@@ -20,6 +21,7 @@ const APPLE = Symbol('apple');
 export const TILES = {
   WALL,
   EMPTY,
+  SNAKE_DEAD,
   SNAKE_HEAD,
   SNAKE_BODY,
   SNAKE_TAIL,

@@ -1,7 +1,7 @@
 import { DIRECTIONS, TILES } from './consts';
 
 const { EAST, WEST, NORTH, SOUTH } = DIRECTIONS;
-const { WALL, EMPTY, SNAKE_BODY, SNAKE_HEAD, SNAKE_TAIL, APPLE } = TILES;
+const { WALL, EMPTY, SNAKE_BODY, SNAKE_DEAD, SNAKE_HEAD, SNAKE_TAIL, APPLE } = TILES;
 
 
 const setTile = (board, x, y, newTile) => {
@@ -22,8 +22,11 @@ const generateNewBoard = (size) => ([...Array(size).keys()].map(r => (
 const isSnakeHead = (i, snake) => i === 0;
 const isSnakeTail = (i, snake) => i === snake.length - 1;
 
-const drawSnake = (board, snake) => snake.reduce(
-  (board, { x, y }, i) => setTile(board, x, y, isSnakeHead(i, snake) ? SNAKE_HEAD : isSnakeTail(i, snake) ? SNAKE_TAIL : SNAKE_BODY),
+const drawSnake = (board, snake, alive) => snake.reduce(
+  (board, { x, y }, i) => setTile(board, x, y, 
+    isSnakeHead(i, snake) ? 
+      (alive ? SNAKE_HEAD : SNAKE_DEAD) : 
+      isSnakeTail(i, snake) ? SNAKE_TAIL : SNAKE_BODY),
   board
 );
 
@@ -32,8 +35,8 @@ const drawApples = (board, apples) => apples.reduce(
   board
 );
 
-export const getBoard = ({ boardSize, snake, apples }) => (
-  drawApples(drawSnake(generateNewBoard(boardSize), snake), apples)
+export const getBoard = ({ boardSize, snake, apples }, alive) => (
+  drawApples(drawSnake(generateNewBoard(boardSize), snake, alive), apples)
 )
 
 export const moveInDirection = ({ x, y }, direction) => (
