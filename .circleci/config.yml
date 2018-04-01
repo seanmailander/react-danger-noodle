@@ -3,19 +3,15 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
+
+defaults: &defaults
+  working_directory: /tmp
+  docker:
+    - image: circleci/node:8.10
+
 jobs:
   build-job:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8.10
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
+    <<: *defaults
     steps:
       - checkout
 
@@ -39,34 +35,27 @@ jobs:
       # run build!
       - run: yarn build
 
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
+      - persist_to_workspace:
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+	  # taken to be the root directory of the workspace.
+          root: repo
+          # Must be relative path from root
+          paths:
+            - build
+            - node_modules
+
   deploy-job:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8.10
-    working_directory: ~/repo
+    <<: *defaults
     steps:
       - checkout
-      
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - yarn-packages-{{ .Branch }}
-            - yarn-packages-master
-            - yarn-packages-
 
-      - run:
-          name: Install Dependencies
-          command: yarn install
+      - attach_workspace:
+          # Must be absolute path or relative path from working_directory
+          at: repo
 
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules/
-            
       # run deploy!
-      - run: yarn deploy
+      - run: gh-pages -d build
 
 
 
