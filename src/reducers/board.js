@@ -15,6 +15,7 @@ const removeTailIfNeeded = (snake, intendedLength) => {
 const initialState = {
   boardSize: 16,
   snake: [ { x: 7, y :7 }],
+  length: 1,
   apples: [],
 }
 
@@ -24,8 +25,8 @@ export default (state = initialState, action) => {
       return initialState;
 
     case SNAKE_MOVED: {
-      const { snake } = state;
-      const { x, y, length } = action;
+      const { snake, length } = state;
+      const { x, y } = action;
       const snakeWithNewHead = [{ x, y }, ...snake];
       const snakeWithTailRemovedIfNeeded = removeTailIfNeeded(snakeWithNewHead, length);
       return {
@@ -47,11 +48,12 @@ export default (state = initialState, action) => {
     }
 
     case APPLE_EATEN: {
-      const { apples } = state;
+      const { apples, length } = state;
       const { x, y } = action;
       return {
         ...state,
-        apples: apples.filter(a => !(a.x === x && a.y === y))
+        apples: apples.filter(a => !(a.x === x && a.y === y)),
+        length: length + 5,
       }
     }
 

@@ -5,45 +5,7 @@ import { connect } from 'react-redux'
 import { resetGame, startGame } from '../actions/game'
 import { changePlayerDirection } from '../actions/player'
 
-import './game.css';
-
-import { getBoard } from '../helpers/board';
-
-import { TILES } from '../helpers/consts';
-const { WALL, EMPTY, SNAKE_BODY, SNAKE_DEAD, SNAKE_HEAD, SNAKE_TAIL, APPLE } = TILES;
-
-const snakeTileToContent = {
-  [SNAKE_BODY]: 'b',
-  [SNAKE_DEAD]: 'd',
-  [SNAKE_HEAD]: 'h',
-  [SNAKE_TAIL]: 't',
-  [APPLE]: 'a',
-}
-
-const renderTile = tile => (
-  snakeTileToContent[tile]
-);
-
-const mapTileToClass = tile => (
-  tile === WALL ? 'wall' : 'empty'
-)
-
-const renderCol = ({ tile }, i) => (
-  <div className={(`col ${mapTileToClass(tile)}`)} key={i}>
-    <div className="tile">{renderTile(tile)}</div>
-  </div>
-)
-const renderRow = (row, i) => (
-  <div className="row" key={i}>
-    {row.map(renderCol)}
-  </div>
-)
-const renderBoard = (board, alive) => (
-  <div className="board">
-    {getBoard(board, alive).map(renderRow)}
-  </div>
-)
-
+import AnimatedBoard from './animatedBoard';
 
 export class GameComponent extends Component {
   componentDidMount() {
@@ -55,10 +17,10 @@ export class GameComponent extends Component {
   render() {
     const { changePlayerDirection, board, alive, running, startGame, resetGame, gameTick } = this.props;
     return <div>
-      {renderBoard(board, alive)}
+      <AnimatedBoard board={board} alive={alive} run={running} />
 
       <p>
-        {!running ? <button onClick={startGame}>Start game</button> : null}
+        {alive && !running ? <button onClick={startGame}>Start game</button> : null}
         {!alive ? <button onClick={resetGame}>Restart game</button> : null}
       </p>
       <p>Count: {gameTick}</p>

@@ -6,7 +6,7 @@ import { APPLE_EATEN, SNAKE_DIED } from './gameLogic';
 
 export const APPLE_ADDED = Symbol('apples/ADDED_APPLE');
 
-const timeToNextApple = 3000;
+const timeToNextApple = 1000;
 
 function* addApple({ x, y }) {
   yield put({ type: APPLE_ADDED, x, y });

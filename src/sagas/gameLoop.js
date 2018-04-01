@@ -7,7 +7,7 @@ import { PLAYER_CHANGED_DIRECTION } from '../actions/player';
 
 export const TIME_TICKED = Symbol('gameLoop/TIME_TICKED');
 
-const timerInterval = 300;
+const timerInterval = 100;
 
 function* tickTime() {
   yield put({ type: TIME_TICKED });

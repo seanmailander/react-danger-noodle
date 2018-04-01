@@ -25,7 +25,8 @@ export default (state = initialState, action) => {
     case SNAKE_DIED:
       return {
         ...state,
-        alive: false
+        alive: false,
+        running: false,
       }
 
     case GAME_RESET:

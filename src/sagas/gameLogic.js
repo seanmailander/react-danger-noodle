@@ -26,7 +26,6 @@ function* getCurrentSnake() {
   const snakeHead = snake[0];
   return {
     currentLocation: snakeHead,
-    currentLength: snake.length,
   }
 }
 
@@ -56,7 +55,7 @@ function* checkAppleChomp({ x, y }) {
 }
 
 function* gameLogic() {
-  const { currentLocation, currentLength } = yield getCurrentSnake();
+  const { currentLocation } = yield getCurrentSnake();
   const newLocation = yield movePlayer();
   const didCollide = yield checkWallCollision(newLocation);
   const didEatApple = yield checkAppleChomp(newLocation);
@@ -68,9 +67,7 @@ function* gameLogic() {
       yield eatApple(newLocation);
     }
 
-    const newLength = currentLength + (didEatApple ? 1 : 0);
-
-    yield moveSnake({ ...newLocation, length: newLength });
+    yield moveSnake({ ...newLocation });
   }
 }
 
