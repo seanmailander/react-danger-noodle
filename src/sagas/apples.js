@@ -7,7 +7,6 @@ import { APPLE_EATEN } from './gameLoop';
 export const APPLE_ADDED = Symbol('apples/ADDED_APPLE');
 
 function* makeApple() {
-  console.log('making an apple');
   yield call(delay, 3000);
   yield put({ type: APPLE_ADDED, x: 3, y: 3 });
 }

@@ -1,5 +1,5 @@
 import { GAME_RESET } from '../actions/game';
-import { SNAKE_MOVED } from '../sagas/gameLoop';
+import { SNAKE_MOVED, APPLE_EATEN } from '../sagas/gameLoop';
 import { APPLE_ADDED } from '../sagas/apples';
 
 const removeTailIfNeeded = (snake, intendedLength) => {
@@ -11,7 +11,6 @@ const removeTailIfNeeded = (snake, intendedLength) => {
 
   return snake;
 }
-
 
 const initialState = {
   boardSize: 16,
@@ -44,6 +43,15 @@ export default (state = initialState, action) => {
           ...apples,
           { x, y }
         ]
+      }
+    }
+
+    case APPLE_EATEN: {
+      const { apples } = state;
+      const { x, y } = action;
+      return {
+        ...state,
+        apples: apples.filter(a => !(a.x === x && a.y === y))
       }
     }
 

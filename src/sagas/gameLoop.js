@@ -21,15 +21,19 @@ function* movePlayer() {
   
   const didEatApple = isApple(apples, { x, y });
 
+  if (didEatApple) {
+    yield put({ type: APPLE_EATEN, x, y });
+  }
+
   yield put({ type: SNAKE_MOVED, x, y, length: snake.length + (didEatApple ? 1 : 0) });
 }
 
 function checkWallCollision() {
-  console.log('checking wall collision');
+  // console.log('checking wall collision');
 }
 
 function checkAppleChomp() {
-  console.log('checking apple chomp');
+  // console.log('checking apple chomp');
 }
 
 function* gameLoop() {
