@@ -1,5 +1,5 @@
 import { GAME_RESET, GAME_STARTED } from '../actions/game';
-import { TIME_TICKED } from '../sagas/gameLoop';
+import { TIME_TICKED, GAME_OVER } from '../sagas/gameLoop';
 import { SNAKE_DIED } from '../sagas/gameLogic';
 
 const initialState = {
@@ -26,8 +26,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         alive: false,
-        running: false,
       }
+
+    case GAME_OVER:
+        return {
+          ...state,
+          running: false,
+        }
 
     case GAME_RESET:
       return {
