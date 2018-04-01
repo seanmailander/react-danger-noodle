@@ -54,6 +54,10 @@ jobs:
           # Must be absolute path or relative path from working_directory
           at: ~/repo
 
+      -run:
+      - git config --global user.email "$GIT_AUTHOR_EMAIL"
+      - git config --global user.name "$GIT_AUTHOR_NAME"
+      
       # run deploy!
       - run: npx gh-pages -d build
 
