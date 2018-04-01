@@ -1,5 +1,5 @@
 import { GAME_RESET } from '../actions/game';
-import { SNAKE_MOVED, APPLE_EATEN } from '../sagas/gameLoop';
+import { SNAKE_MOVED, APPLE_EATEN } from '../sagas/gameLogic';
 import { APPLE_ADDED } from '../sagas/apples';
 
 const removeTailIfNeeded = (snake, intendedLength) => {

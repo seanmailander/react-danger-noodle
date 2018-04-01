@@ -52,13 +52,15 @@ const Game = props => (
 
     <p>
       <button onClick={props.startGame}>Start game</button>
-      <button onClick={props.resetGame}>Reset game</button>
+      {!props.alive ? <button onClick={props.resetGame}>Restart game</button> : null}
     </p>
     <p>Count: {props.gameTick}</p>
+    {!props.alive ? <p>Dead!</p> : null}
   </div>
 )
 
 const mapStateToProps = state => ({
+  alive: state.game.alive,
   gameTick: state.game.gameTick,
   board: state.board,
 })

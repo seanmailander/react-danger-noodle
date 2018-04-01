@@ -6,6 +6,7 @@ import createSagaMiddleware from 'redux-saga'
 
 import rootReducer from './reducers/rootReducer.js'
 import gameLoopSaga from './sagas/gameLoop'
+import gameLogicSaga from './sagas/gameLogic'
 import appleSaga from './sagas/apples'
 
 
@@ -39,6 +40,7 @@ const store = createStore(
 
 // then run the saga
 sagaMiddleware.run(gameLoopSaga);
+sagaMiddleware.run(gameLogicSaga);
 sagaMiddleware.run(appleSaga);
 
 export default store
