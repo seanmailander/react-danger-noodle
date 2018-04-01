@@ -12,9 +12,10 @@ const keyToDirectionMap = {
 }
 
 const checkKeyMatters = (key) => (keyToDirectionMap.hasOwnProperty(key));
+const checkKeyIsNew = (key, state) => state.player.direction !== keyToDirectionMap[key];
 
-export const changePlayerDirection = ({ key }) => dispatch => (
-  checkKeyMatters(key) ? 
+export const changePlayerDirection = ({ key }) => (dispatch, getState) => (
+  checkKeyMatters(key) && checkKeyIsNew(key, getState()) ? 
     dispatch({
       type: PLAYER_CHANGED_DIRECTION,
       direction: keyToDirectionMap[key],

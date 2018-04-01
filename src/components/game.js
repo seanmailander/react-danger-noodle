@@ -47,10 +47,10 @@ const renderBoard = (board, alive) => (
 
 export class GameComponent extends Component {
   componentDidMount() {
-      document.addEventListener('keydown', this.props.changePlayerDirection);
+      document.addEventListener('keypress', this.props.changePlayerDirection);
   }
   componentDidUnMount() {
-      document.removeEventListener('keydown', this.props.changePlayerDirection);
+      document.removeEventListener('keypress', this.props.changePlayerDirection);
   }
   render() {
     const { changePlayerDirection, board, alive, running, startGame, resetGame, gameTick } = this.props;
