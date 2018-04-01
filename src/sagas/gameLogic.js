@@ -7,6 +7,18 @@ export const SNAKE_MOVED = Symbol('gameLoop/PLAYER_MOVED');
 export const APPLE_EATEN = Symbol('gameLoop/APPLE_EATEN');
 export const SNAKE_DIED = Symbol('gameLoop/SNAKE_DIED');
 
+function* killSnake({ x, y }) {
+  yield put({ type: SNAKE_DIED, x, y });
+}
+
+function* eatApple({ x, y }) {
+  yield put({ type: APPLE_EATEN, x, y });
+}
+
+function* moveSnake({ x, y, length }) {
+  yield put({ type: SNAKE_MOVED, x, y, length });
+}
+
 function* getCurrentSnake() {
   const { snake } = yield select(state => ({
     snake: state.board.snake,
@@ -40,18 +52,6 @@ function* checkAppleChomp({ x, y }) {
     apples: state.board.apples,
   }));
   return isApple(apples, { x, y });
-}
-
-function* killSnake({ x, y }) {
-  yield put({ type: SNAKE_DIED, x, y });
-}
-
-function* eatApple({ x, y }) {
-  yield put({ type: APPLE_EATEN, x, y });
-}
-
-function* moveSnake({ x, y, length }) {
-  yield put({ type: SNAKE_MOVED, x, y, length });
 }
 
 function* gameLogic() {
