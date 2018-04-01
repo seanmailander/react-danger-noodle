@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
@@ -44,21 +44,28 @@ const renderBoard = (board, alive) => (
   </div>
 )
 
-const Game = props => (
-  <div 
-  tabIndex={0} // so keydowns are actually captured
-  onKeyDown={props.changePlayerDirection}>
 
-    {renderBoard(props.board, props.alive)}
+export class GameComponent extends Component {
+  componentDidMount() {
+      document.addEventListener('keydown', this.props.changePlayerDirection);
+  }
+  componentDidUnMount() {
+      document.removeEventListener('keydown', this.props.changePlayerDirection);
+  }
+  render() {
+    const { changePlayerDirection, board, alive, running, startGame, resetGame, gameTick } = this.props;
+    return <div>
+      {renderBoard(board, alive)}
 
-    <p>
-      {!props.running ? <button onClick={props.startGame}>Start game</button> : null}
-      {!props.alive ? <button onClick={props.resetGame}>Restart game</button> : null}
-    </p>
-    <p>Count: {props.gameTick}</p>
-    {!props.alive ? <p>Dead!</p> : null}
-  </div>
-)
+      <p>
+        {!running ? <button onClick={startGame}>Start game</button> : null}
+        {!alive ? <button onClick={resetGame}>Restart game</button> : null}
+      </p>
+      <p>Count: {gameTick}</p>
+      {!alive ? <p>Dead!</p> : null}
+    </div>
+  }
+};
 
 const mapStateToProps = state => ({
   alive: state.game.alive,
@@ -76,4 +83,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Game)
+)(GameComponent)
