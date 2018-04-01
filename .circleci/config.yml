@@ -55,7 +55,7 @@ jobs:
           at: ~/repo
 
       # run deploy!
-      - run: gh-pages -d build
+      - run: npx gh-pages -d build
 
 
 
