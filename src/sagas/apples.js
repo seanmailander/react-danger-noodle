@@ -42,7 +42,7 @@ function* getRandomApplePosition() {
 }
 
 function* makeApple() {
-  const { dead, timer } = yield race({
+  const { dead } = yield race({
     dead: take(SNAKE_DIED),
     timer: call(delay, timeToNextApple)
   })

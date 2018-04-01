@@ -4,7 +4,7 @@ import { PLAYER_CHANGED_DIRECTION } from '../actions/player';
 import { DIRECTIONS } from '../helpers/consts';
 import { SNAKE_MOVED } from '../sagas/gameLogic';
 
-const { EAST, WEST, NORTH, SOUTH } = DIRECTIONS;
+const { NORTH } = DIRECTIONS;
 
 const initialState = {
   directions: [NORTH],

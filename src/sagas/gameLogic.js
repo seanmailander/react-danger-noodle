@@ -1,6 +1,6 @@
 import { put, takeLatest, select } from 'redux-saga/effects'
 
-import { findSnakeHead, moveInDirection, isApple } from '../helpers/board';
+import { moveInDirection, isApple } from '../helpers/board';
 import { TIME_TICKED } from './gameLoop';
 
 export const SNAKE_MOVED = Symbol('gameLoop/PLAYER_MOVED');

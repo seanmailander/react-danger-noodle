@@ -1,9 +1,9 @@
-import { delay, takeLatest } from 'redux-saga';
+import { delay } from 'redux-saga';
 import { put, call, takeEvery, take, all, race } from 'redux-saga/effects'
 
 import { GAME_STARTED, GAME_RESET } from '../actions/game';
 import { SNAKE_DIED } from './gameLogic';
-import { PLAYER_CHANGED_DIRECTION } from '../actions/player';
+// import { PLAYER_CHANGED_DIRECTION } from '../actions/player';
 
 export const TIME_TICKED = Symbol('gameLoop/TIME_TICKED');
 export const GAME_OVER = Symbol('gameLoop/GAME_OVER');
@@ -23,7 +23,7 @@ function* delayGameOver() {
 }
 
 function* gameLoop() {
-  const { dead, timer } = yield race({
+  const { dead } = yield race({
     dead: take(SNAKE_DIED),
     // move: take(PLAYER_CHANGED_DIRECTION),
     timer: call(delay, timerInterval)

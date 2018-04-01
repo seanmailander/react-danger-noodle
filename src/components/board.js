@@ -5,7 +5,7 @@ import './board.css';
 import { getBoard } from '../helpers/board';
 import { TILES } from '../helpers/consts';
 
-const { WALL, EMPTY, SNAKE_BODY, SNAKE_DEAD, SNAKE_HEAD, SNAKE_TAIL, APPLE } = TILES;
+const { WALL, SNAKE_BODY, SNAKE_DEAD, SNAKE_HEAD, SNAKE_TAIL, APPLE } = TILES;
 
 const snakeTileToContent = {
   [SNAKE_BODY]: 'b',

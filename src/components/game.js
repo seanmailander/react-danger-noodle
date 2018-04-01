@@ -15,7 +15,7 @@ export class GameComponent extends Component {
       document.removeEventListener('keypress', this.props.changePlayerDirection);
   }
   render() {
-    const { changePlayerDirection, board, alive, running, startGame, resetGame, gameTick } = this.props;
+    const { board, alive, running, startGame, resetGame, gameTick } = this.props;
     return <div>
       <AnimatedBoard board={board} alive={alive} run={running} />
 
