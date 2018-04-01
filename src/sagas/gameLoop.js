@@ -16,7 +16,7 @@ function* tickTime() {
 function* gameLoop() {
   const { dead, timer } = yield race({
     dead: take(SNAKE_DIED),
-    move: take(PLAYER_CHANGED_DIRECTION),
+    // move: take(PLAYER_CHANGED_DIRECTION),
     timer: call(delay, timerInterval)
   })
   if (!dead) {
