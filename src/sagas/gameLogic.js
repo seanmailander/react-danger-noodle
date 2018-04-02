@@ -1,4 +1,4 @@
-import { put, takeLatest, select } from 'redux-saga/effects'
+import { put, takeLatest, select } from 'redux-saga/effects';
 
 import { moveInDirection, isApple } from '../helpers/board';
 import { TIME_TICKED } from './gameLoop';
@@ -16,7 +16,9 @@ function* eatApple({ x, y }) {
 }
 
 function* moveSnake({ x, y, length }) {
-  yield put({ type: SNAKE_MOVED, x, y, length });
+  yield put({
+    type: SNAKE_MOVED, x, y, length,
+  });
 }
 
 function* getCurrentSnake() {
@@ -26,17 +28,17 @@ function* getCurrentSnake() {
   const snakeHead = snake[0];
   return {
     currentLocation: snakeHead,
-  }
+  };
 }
 
 function* movePlayer() {
   const { snake, playerDirection } = yield select(state => ({
     snake: state.board.snake,
     // playerDirection: state.player.directions[0]
-    playerDirection: state.player.direction
+    playerDirection: state.player.direction,
   }));
   const snakeHead = snake[0];
-  return moveInDirection(snakeHead, playerDirection)
+  return moveInDirection(snakeHead, playerDirection);
 }
 
 function* checkWallCollision({ x, y }) {

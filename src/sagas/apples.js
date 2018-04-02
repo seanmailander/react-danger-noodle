@@ -1,5 +1,5 @@
-import { delay } from 'redux-saga'
-import { put, take, all, call, takeEvery, race, select } from 'redux-saga/effects'
+import { delay } from 'redux-saga';
+import { put, take, all, call, takeEvery, race, select } from 'redux-saga/effects';
 
 import { GAME_STARTED, GAME_RESET } from '../actions/game';
 import { APPLE_EATEN, SNAKE_DIED } from './gameLogic';
@@ -20,8 +20,8 @@ function* getApplePositionWhitelist() {
 
   const validSpots = [];
   const iterator = [...Array(boardSize - 2).keys()];
-  iterator.forEach(r => {
-    iterator.forEach(c => {
+  iterator.forEach((r) => {
+    iterator.forEach((c) => {
       const newSpot = { x: r + 1, y: c + 1 };
       if (!snake.some(s => s.x === newSpot.x && s.y === newSpot.y)) {
         validSpots.push(newSpot);
@@ -38,14 +38,14 @@ function getRandomInt(max) {
 function* getRandomApplePosition() {
   const applePositionWhitelist = yield getApplePositionWhitelist();
   const selectedPosition = getRandomInt(applePositionWhitelist.length - 1);
-  return applePositionWhitelist[selectedPosition]
+  return applePositionWhitelist[selectedPosition];
 }
 
 function* makeApple() {
   const { dead } = yield race({
     dead: take(SNAKE_DIED),
-    timer: call(delay, timeToNextApple)
-  })
+    timer: call(delay, timeToNextApple),
+  });
   if (!dead) {
     const randomApplePosition = yield getRandomApplePosition();
     yield addApple(randomApplePosition);

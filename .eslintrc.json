@@ -1,0 +1,12 @@
+{
+    "extends": "airbnb",
+    "rules": {
+        "react/jsx-filename-extension": "off",
+        "no-nested-ternary": "warn",
+        "react/prop-types": "off"
+    },
+    "globals": {
+        "document": true,
+        "it": true
+    }
+}

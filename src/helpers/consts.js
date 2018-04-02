@@ -8,7 +8,7 @@ export const DIRECTIONS = {
   WEST,
   NORTH,
   SOUTH,
-}
+};
 
 const WALL = Symbol('wallTile');
 const EMPTY = Symbol('emptyTile');
@@ -25,5 +25,5 @@ export const TILES = {
   SNAKE_HEAD,
   SNAKE_BODY,
   SNAKE_TAIL,
-  APPLE
-}
+  APPLE,
+};

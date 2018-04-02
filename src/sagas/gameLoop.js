@@ -1,5 +1,5 @@
 import { delay } from 'redux-saga';
-import { put, call, takeEvery, take, all, race } from 'redux-saga/effects'
+import { put, call, takeEvery, take, all, race } from 'redux-saga/effects';
 
 import { GAME_STARTED, GAME_RESET } from '../actions/game';
 import { SNAKE_DIED } from './gameLogic';
@@ -26,8 +26,8 @@ function* gameLoop() {
   const { dead } = yield race({
     dead: take(SNAKE_DIED),
     // move: take(PLAYER_CHANGED_DIRECTION), todo
-    timer: call(delay, timerInterval)
-  })
+    timer: call(delay, timerInterval),
+  });
   if (!dead) {
     yield tickTime();
   }

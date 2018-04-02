@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import MainLoop from 'mainloop.js';
 
 const FPS = 60;
@@ -24,28 +23,29 @@ const noop = () => {};
  * @return {ReactComponent} An animated version of the given component.
  */
 export default (timestep = TIMESTEP, maxFPS = MAX_FPS) => (AnimatedComponent) => {
-
   class Animator extends React.Component {
     componentDidMount() {
       const { userUpdate, userBegin } = this.props;
       const begin = userBegin || noop;
-      const update = (delta) => userUpdate(delta);
+      const update = delta => userUpdate(delta);
       const draw = (/* interpolationPercentage */) => this.forceUpdate();
-      const endOfFrame = (/*fps*/_, panic) => {
-              // TODO let user supply callback for this
-              if (panic) {
-                loop.resetFrameDelta();
-              }
-            };
+      const endOfFrame = (/* fps */_, panic) => {
+        // TODO let user supply callback for this
+        if (panic) {
+          // eslint-disable-next-line
+          loop.resetFrameDelta();
+        }
+      };
 
       const loop = MainLoop
-              .setMaxAllowedFPS(maxFPS)
-              .setSimulationTimestep(timestep)
-              .setBegin(begin)
-              .setUpdate(update)
-              .setDraw(draw)
-              .setEnd(endOfFrame);
+        .setMaxAllowedFPS(maxFPS)
+        .setSimulationTimestep(timestep)
+        .setBegin(begin)
+        .setUpdate(update)
+        .setDraw(draw)
+        .setEnd(endOfFrame);
 
+        // eslint-disable-next-line
       this.setState({
         loop,
       });
@@ -81,12 +81,12 @@ export default (timestep = TIMESTEP, maxFPS = MAX_FPS) => (AnimatedComponent) =>
     }
   }
 
-  Animator.propTypes = {
-    run: PropTypes.bool
-  };
+  // Animator.propTypes = {
+  //   run: PropTypes.bool,
+  // };
 
   Animator.defaultProps = {
-    run: true
+    run: true,
   };
 
   return Animator;
