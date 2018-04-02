@@ -13,8 +13,8 @@ const removeTailIfNeeded = (snake, intendedLength) => {
 }
 
 const initialState = {
-  boardSize: 16,
-  snake: [ { x: 7, y :7 }],
+  boardSize: 32,
+  snake: [{ x: 15, y: 15 }],
   length: 1,
   apples: [],
 }
