@@ -11,9 +11,9 @@
   display: flex;
 }
 .col {
-  background: lightgray;
+  background: #ccc;
   /* margin: 5px; */
-  border: 1px solid grey;
+  border: 1px solid #ebebeb;
   color: blue;
   font-weight: bold;
   flex: 1 0 auto;
@@ -28,7 +28,7 @@
 
 
 .col.wall {
-  background: darkred;
+  background: rgb(114, 2, 86);
 }
 .col.empty {
   /* noop */

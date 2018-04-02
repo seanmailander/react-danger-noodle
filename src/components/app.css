@@ -1,4 +1,11 @@
 .app header {
   text-align: center;
   font-size: x-large;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+body {
+  background-color: #ebebeb;
 }
