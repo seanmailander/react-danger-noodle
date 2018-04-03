@@ -17,7 +17,7 @@ export class GameComponent extends Component {
   render() {
     const {
       // eslint-disable-next-line no-shadow
-      board, alive, running, startGame, resetGame, gameTick,
+      board, alive, running, startGame, resetGame, applesEaten,
     } = this.props;
     return (
       <div>
@@ -27,7 +27,7 @@ export class GameComponent extends Component {
           {alive && !running ? <button onClick={startGame}>Start game</button> : null}
           {!alive ? <button onClick={resetGame}>Restart game</button> : null}
         </p>
-        <p>Count: {gameTick}</p>
+        <p>Score: {applesEaten}</p>
         {!alive ? <p>Dead!</p> : null}
       </div>);
   }
@@ -36,7 +36,7 @@ export class GameComponent extends Component {
 const mapStateToProps = state => ({
   alive: state.game.alive,
   running: state.game.running,
-  gameTick: state.game.gameTick,
+  applesEaten: state.board.applesEaten,
   board: state.board,
 });
 
