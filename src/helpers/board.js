@@ -24,19 +24,21 @@ const generateNewBoard = size => ([...Array(size).keys()].map(r => (
   r === 0 || r === (size - 1) ? generateRow(size, WALL) : generateRow(size, EMPTY)))
 );
 
-// eslint-disable-next-line
-const isSnakeHead = (i, snake) => i === 0;
-const isSnakeTail = (i, snake) => i === snake.length - 1;
-// eslint-disable-next-line
-const isSnakeNeck = (i, snake) => i === 1;
+/* eslint-disable */
+const aliveSnakePositions = [ SNAKE_HEAD, SNAKE_NECK, SNAKE_BODY, SNAKE_TAIL ];
+const deadSnakePositions = [ SNAKE_DEAD, SNAKE_BODY, SNAKE_DEAD ].concat(...aliveSnakePositions);
+
+const getSnek = (currentPosition, alive, totalLength) => (
+  alive ? aliveSnakePositions[currentPosition % aliveSnakePositions.length] :
+  deadSnakePositions[currentPosition % deadSnakePositions.length] 
+)
+/* eslint-enable */
+
 
 const drawSnake = (startingBoard, snake, alive) => snake.reduce(
   (board, { x, y }, i) => setTile(
     board, x, y,
-    isSnakeHead(i, snake) ?
-      (alive ? SNAKE_HEAD : SNAKE_DEAD) :
-      isSnakeTail(i, snake) ? SNAKE_TAIL :
-        isSnakeNeck(i, snake) ? SNAKE_NECK : SNAKE_BODY,
+    getSnek(i, alive, snake.length),
   ),
   startingBoard,
 );
