@@ -13,11 +13,19 @@ const keyToDirectionMap = {
   d: EAST,
 };
 
+const directionToReverseMap = {
+  [SOUTH]: NORTH,
+  [NORTH]: SOUTH,
+  [EAST]: WEST,
+  [WEST]: EAST,
+};
+
 const checkKeyMatters = key => (Object.prototype.hasOwnProperty.call(keyToDirectionMap, key));
+const checkKeyIsNotReverse = (key, state) => state.player.direction !== directionToReverseMap[keyToDirectionMap[key]];
 const checkKeyIsNew = (key, state) => state.player.direction !== keyToDirectionMap[key];
 
 export const changePlayerDirection = ({ key }) => (dispatch, getState) => (
-  checkKeyMatters(key) && checkKeyIsNew(key, getState()) ?
+  checkKeyMatters(key) && checkKeyIsNew(key, getState()) && checkKeyIsNotReverse(key, getState()) ?
     dispatch({
       type: PLAYER_CHANGED_DIRECTION,
       direction: keyToDirectionMap[key],
