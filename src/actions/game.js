@@ -1,19 +1,16 @@
-export const GAME_STARTED = Symbol('game/GAME_STARTED');
 export const GAME_RESET = Symbol('game/GAME_RESET');
 export const TIME_TICKED = Symbol('game/TIME_TICKED');
 
-export const startGame = () => (dispatch, getState) => (
-  getState().game.running ? null :
-    dispatch({
-      type: GAME_STARTED,
-    })
+const startGame = () => dispatch => (
+  dispatch({
+    type: GAME_RESET,
+  })
 );
 
-export const resetGame = () => (dispatch, getState) => (
-  !getState().game.running ? null :
-    dispatch({
-      type: GAME_RESET,
-    })
+const checkKeyMatters = key => ["w", "s", "a", "d", "r"].some(k => k === key);
+
+export const startGameIfPossible = ({ key }) => (dispatch, getState) => (
+  checkKeyMatters(key) && !getState().game.running ? dispatch(startGame()) : null
 );
 
 const minimumToTick = 100;

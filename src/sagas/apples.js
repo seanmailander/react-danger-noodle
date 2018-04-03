@@ -1,7 +1,7 @@
 import { delay } from 'redux-saga';
 import { put, take, all, call, takeEvery, race, select } from 'redux-saga/effects';
 
-import { GAME_STARTED, GAME_RESET } from '../actions/game';
+import { GAME_RESET } from '../actions/game';
 import { APPLE_EATEN, SNAKE_DIED } from './gameLogic';
 
 export const APPLE_ADDED = Symbol('apples/ADDED_APPLE');
@@ -55,7 +55,6 @@ function* makeApple() {
 function* appleSaga() {
   yield all([
     takeEvery(APPLE_EATEN, makeApple),
-    takeEvery(GAME_STARTED, makeApple),
     takeEvery(GAME_RESET, makeApple),
   ]);
 }

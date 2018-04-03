@@ -1,4 +1,4 @@
-import { GAME_RESET, GAME_STARTED } from '../actions/game';
+import { GAME_RESET } from '../actions/game';
 import { PLAYER_CHANGED_DIRECTION } from '../actions/player';
 
 import { DIRECTIONS } from '../helpers/consts';
@@ -17,14 +17,11 @@ export default (state = initialState, action) => {
         direction: action.direction,
       };
 
-    case GAME_STARTED:
+    case GAME_RESET:
       return {
-        ...state,
+        ...initialState,
         direction: state.direction || NORTH,
       };
-
-    case GAME_RESET:
-      return initialState;
 
     default:
       return state;
