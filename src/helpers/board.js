@@ -4,7 +4,7 @@ const {
   EAST, WEST, NORTH, SOUTH,
 } = DIRECTIONS;
 const {
-  WALL, EMPTY, SNAKE_BODY, SNAKE_DEAD, SNAKE_HEAD, SNAKE_TAIL, APPLE,
+  WALL, EMPTY, SNAKE_BODY, SNAKE_DEAD, SNAKE_HEAD, SNAKE_NECK, SNAKE_TAIL, APPLE,
 } = TILES;
 
 
@@ -27,13 +27,16 @@ const generateNewBoard = size => ([...Array(size).keys()].map(r => (
 // eslint-disable-next-line
 const isSnakeHead = (i, snake) => i === 0;
 const isSnakeTail = (i, snake) => i === snake.length - 1;
+// eslint-disable-next-line
+const isSnakeNeck = (i, snake) => i === 1;
 
 const drawSnake = (startingBoard, snake, alive) => snake.reduce(
   (board, { x, y }, i) => setTile(
     board, x, y,
     isSnakeHead(i, snake) ?
       (alive ? SNAKE_HEAD : SNAKE_DEAD) :
-      isSnakeTail(i, snake) ? SNAKE_TAIL : SNAKE_BODY,
+      isSnakeTail(i, snake) ? SNAKE_TAIL :
+        isSnakeNeck(i, snake) ? SNAKE_NECK : SNAKE_BODY,
   ),
   startingBoard,
 );

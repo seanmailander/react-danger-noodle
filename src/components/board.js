@@ -6,14 +6,15 @@ import { getBoard } from '../helpers/board';
 import { TILES } from '../helpers/consts';
 
 const {
-  WALL, SNAKE_BODY, SNAKE_DEAD, SNAKE_HEAD, SNAKE_TAIL, APPLE,
+  WALL, SNAKE_BODY, SNAKE_DEAD, SNAKE_HEAD, SNAKE_NECK, SNAKE_TAIL, APPLE,
 } = TILES;
 
 const snakeTileToContent = {
-  [SNAKE_BODY]: 'b',
   [SNAKE_DEAD]: 'd',
-  [SNAKE_HEAD]: 'h',
-  [SNAKE_TAIL]: 't',
+  [SNAKE_HEAD]: 's',
+  [SNAKE_NECK]: 'n',
+  [SNAKE_BODY]: 'e',
+  [SNAKE_TAIL]: 'k',
   [APPLE]: 'a',
 };
 
