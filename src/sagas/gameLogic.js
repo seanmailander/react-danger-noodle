@@ -49,6 +49,13 @@ function* checkWallCollision({ x, y }) {
   return x === 0 || x === boardLimit || y === 0 || y === boardLimit;
 }
 
+function* checkSnakeCollision({ x, y }) {
+  const { snake } = yield select(state => ({
+    snake: state.board.snake,
+  }));
+  return snake.some(pos => pos.x === x && pos.y === y);
+}
+
 function* checkAppleChomp({ x, y }) {
   const { apples } = yield select(state => ({
     apples: state.board.apples,
@@ -60,9 +67,10 @@ function* gameLogic() {
   const { currentLocation } = yield getCurrentSnake();
   const newLocation = yield movePlayer();
   const didCollide = yield checkWallCollision(newLocation);
+  const didWrap = yield checkSnakeCollision(newLocation);
   const didEatApple = yield checkAppleChomp(newLocation);
 
-  if (didCollide) {
+  if (didCollide || didWrap) {
     yield killSnake(currentLocation);
   } else {
     if (didEatApple) {
