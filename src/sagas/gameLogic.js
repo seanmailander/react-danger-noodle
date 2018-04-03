@@ -35,7 +35,7 @@ function* movePlayer() {
   const { snake, playerDirection } = yield select(state => ({
     snake: state.board.snake,
     // playerDirection: state.player.directions[0]
-    playerDirection: state.player.direction,
+    playerDirection: state.player.nextDirection,
   }));
   const snakeHead = snake[0];
   return moveInDirection(snakeHead, playerDirection);

@@ -21,8 +21,8 @@ const directionToReverseMap = {
 };
 
 const checkKeyMatters = key => (Object.prototype.hasOwnProperty.call(keyToDirectionMap, key));
-const checkKeyIsNotReverse = (key, state) => state.player.direction !== directionToReverseMap[keyToDirectionMap[key]];
-const checkKeyIsNew = (key, state) => state.player.direction !== keyToDirectionMap[key];
+const checkKeyIsNotReverse = (key, state) => state.player.currentDirection !== directionToReverseMap[keyToDirectionMap[key]];
+const checkKeyIsNew = (key, state) => state.player.currentDirection !== keyToDirectionMap[key];
 
 export const changePlayerDirection = ({ key }) => (dispatch, getState) => (
   checkKeyMatters(key) && checkKeyIsNew(key, getState()) && checkKeyIsNotReverse(key, getState()) ?
