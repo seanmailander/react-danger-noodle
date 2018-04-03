@@ -24,6 +24,7 @@ export default (state = initialState, action) => {
     case GAME_RESET:
       return {
         ...initialState,
+        alive: true,
         running: true,
       };
 
