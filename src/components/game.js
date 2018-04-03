@@ -10,21 +10,23 @@ import AnimatedBoard from './animatedBoard';
 export class GameComponent extends Component {
   componentDidMount() {
     document.addEventListener('keypress', this.props.changePlayerDirection);
+    document.addEventListener('keypress', this.props.startGame);
   }
   componentDidUnMount() {
     document.removeEventListener('keypress', this.props.changePlayerDirection);
+    document.removeEventListener('keypress', this.props.startGame);
   }
   render() {
     const {
       // eslint-disable-next-line no-shadow
-      board, alive, running, startGame, resetGame, applesEaten,
+      board, alive, running, resetGame, applesEaten,
     } = this.props;
     return (
       <div>
         <AnimatedBoard board={board} alive={alive} run={running} />
 
         <p>
-          {alive && !running ? <button onClick={startGame}>Start game</button> : null}
+          {!running ? "Press any key (W, S, A, D) to start game" : null }
           {!alive ? <button onClick={resetGame}>Restart game</button> : null}
         </p>
         <p>Score: {applesEaten}</p>

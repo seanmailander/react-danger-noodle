@@ -1,7 +1,7 @@
 import { put, takeLatest, select } from 'redux-saga/effects';
 
 import { moveInDirection, isApple } from '../helpers/board';
-import { TIME_TICKED } from './gameLoop';
+import { TIME_TICKED } from '../actions/game';
 
 export const SNAKE_MOVED = Symbol('gameLoop/PLAYER_MOVED');
 export const APPLE_EATEN = Symbol('gameLoop/APPLE_EATEN');

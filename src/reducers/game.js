@@ -1,5 +1,5 @@
-import { GAME_RESET, GAME_STARTED } from '../actions/game';
-import { TIME_TICKED, GAME_OVER } from '../sagas/gameLoop';
+import { GAME_RESET, GAME_STARTED, TIME_TICKED } from '../actions/game';
+import { GAME_OVER } from '../sagas/gameLoop';
 import { SNAKE_DIED } from '../sagas/gameLogic';
 
 const initialState = {
