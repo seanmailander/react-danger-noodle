@@ -55,7 +55,8 @@ export default (timestep = TIMESTEP, maxFPS = MAX_FPS) => (AnimatedComponent) =>
       }
     }
 
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps.run) {
         this.state.loop.start();
       } else {
