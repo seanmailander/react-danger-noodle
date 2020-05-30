@@ -1,4 +1,4 @@
-import { delay } from 'redux-saga';
+import { delay } from 'redux-saga/effects';
 import { put, call, takeEvery, all } from 'redux-saga/effects';
 
 import { SNAKE_DIED } from './gameLogic';
