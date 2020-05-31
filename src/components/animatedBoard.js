@@ -9,7 +9,7 @@ import { tickTime as userUpdate } from '../actions/game';
 const TIMESTEP = 1000 / 60;
 const MAX_FPS = 60;
 
-const animate = new Animator(TIMESTEP, MAX_FPS);
+const animate = Animator(TIMESTEP, MAX_FPS);
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   userUpdate,
