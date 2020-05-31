@@ -23,4 +23,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: yarn install --frozen-lockfile
+    - run: git config user.name $(jq .pusher.username $GITHUB_PAYLOAD)
+    - run: git config user.email $(jq .pusher.email $GITHUB_PAYLOAD)
+    - run: git config user.password ${{ secrets.GITHUB_TOKEN }}
     - run: yarn run deploy
