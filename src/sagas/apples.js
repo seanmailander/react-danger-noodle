@@ -1,4 +1,4 @@
-import { delay } from 'redux-saga';
+import { delay } from 'redux-saga/effects';
 import { put, take, all, call, takeEvery, race, select } from 'redux-saga/effects';
 
 import { GAME_RESET } from '../actions/game';
